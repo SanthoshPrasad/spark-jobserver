@@ -8,6 +8,9 @@ import akka.http.scaladsl.server._
 import akka.stream.ActorMaterializer
 import com.typesafe.sslconfig.akka.AkkaSSLConfig
 import javax.net.ssl.SSLContext
+import org.slf4j.LoggerFactory
+
+import scala.util.{Failure, Success}
 
 /**
  * Contains methods for starting an embedded Spray web server.
@@ -28,12 +31,29 @@ object WebService{
    */
   def start(routes: Route, system: ActorSystem,
             host: String = "0.0.0.0", port: Int = 8080)(implicit sslContext: SSLContext) {
-    val https: HttpsConnectionContext = ConnectionContext.https(sslContext)
+
     implicit val actorSystem: ActorSystem = system
-    Http().setDefaultServerHttpContext(https)
-    Http().bindAndHandle(routes,
+    val logger = LoggerFactory.getLogger(getClass)
+
+   /* commented as jobserver not working with this
+      val https: HttpsConnectionContext = ConnectionContext.https(sslContext)
+      Http().setDefaultServerHttpContext(https)
+      Http().bindAndHandle(routes,
       interface = host,
       port = port,
-      connectionContext = https)
+      connectionContext = https)*/
+
+    val webServiceFuture = Http().bindAndHandle(routes,
+      interface = host,
+      port = port)
+
+    webServiceFuture onComplete{
+      case Success(value) => logger.info("job server  start up succeess : {}", value.toString)
+      case Failure(exception) => logger.error("job server  start up failed ", exception)
+    }
   }
+
+
+
+
 }

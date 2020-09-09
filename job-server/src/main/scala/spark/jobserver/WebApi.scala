@@ -55,7 +55,7 @@ class WebApi(system: ActorSystem, config: Config, port: Int,
 
   val binaryManager: ActorRef = binaryManagerActor
   val supervisor: ActorRef = supervisorActor
-  val jobInfo: ActorRef = supervisorActor
+  val jobInfo: ActorRef = jobInfoActor
 
   def actorRefFactory: ActorSystem = system
   implicit val ec: ExecutionContext = system.dispatcher
@@ -136,7 +136,8 @@ class WebApi(system: ActorSystem, config: Config, port: Int,
       * in config
       */
     implicit val sslContext: SSLContext = {
-      SSLContextFactory.createContext(config.getConfig("akka.http.server"))
+     // SSLContextFactory.createContext(config.getConfig("akka.http.server"))
+      null
     }
 
     logger.info("Starting browser web service...")
