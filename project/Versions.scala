@@ -1,7 +1,7 @@
 import scala.util.Properties.isJavaAtLeast
 
 object Versions {
-  lazy val spark = sys.env.getOrElse("SPARK_VERSION", "2.4.0")
+  lazy val spark = sys.env.getOrElse("SPARK_VERSION", "3.0.0")
 
   lazy val akka = "2.5.18"
   lazy val akkaHttp = "10.1.5"

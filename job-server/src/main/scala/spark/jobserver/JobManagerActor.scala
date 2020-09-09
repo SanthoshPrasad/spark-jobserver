@@ -27,7 +27,7 @@ import spark.jobserver.util.{ContextForcefulKillTimeout, StandaloneForcefulKill}
 import scala.concurrent.{ExecutionContext, ExecutionContextExecutorService, Future}
 import scala.util.{Failure, Success, Try}
 import scala.concurrent.duration._
-import org.spark_project.guava.annotations.VisibleForTesting
+import org.sparkproject.guava.annotations.VisibleForTesting
 
 object JobManagerActor {
   // Messages
