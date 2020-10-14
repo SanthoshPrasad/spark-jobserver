@@ -31,7 +31,7 @@ object JobManager {
 
     val clusterAddress = AddressFromURIString.parse(args(0))
     val managerName = args(1)
-    val systemConfigFile = new File(args(2))
+    val systemConfigFile = new File("/app/docker.conf")
 
     if (!systemConfigFile.exists()) {
       System.err.println(s"Could not find system configuration file $systemConfigFile")
