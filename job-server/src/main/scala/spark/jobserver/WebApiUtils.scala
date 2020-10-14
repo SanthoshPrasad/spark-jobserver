@@ -113,6 +113,6 @@ object WebApiUtils {
   val ResultKey = "result"
 
   import scala.concurrent.duration._
-  val DefaultSyncTimeout: FiniteDuration = 10 seconds
+  val DefaultSyncTimeout: FiniteDuration = 300 seconds
   val DefaultJobLimit = 50
 }
